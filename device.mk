@@ -225,7 +225,8 @@ PRODUCT_PACKAGES += \
 
 # Power
 PRODUCT_PACKAGES += \
-	power.oneplus2
+	power.oneplus2 \
+	thermal.oneplus2
 
 # Ramdisk
 PRODUCT_PACKAGES += \
