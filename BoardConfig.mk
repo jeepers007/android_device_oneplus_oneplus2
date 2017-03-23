@@ -169,6 +169,10 @@ TARGET_PROVIDES_LIBLIGHT := true
 #Enable peripheral manager
 TARGET_PER_MGR_ENABLED := true
 
+# Power
+TARGET_POWERHAL_VARIANT := oneplus2
+TARGET_USES_INTERACTION_BOOST := true
+
 # RPC
 TARGET_NO_RPC := true
 

@@ -216,7 +216,7 @@ PRODUCT_PACKAGES += \
 
 # Power
 PRODUCT_PACKAGES += \
-    power.msm8994
+    power.oneplus2
 
 # Ramdisk
 PRODUCT_PACKAGES += \
