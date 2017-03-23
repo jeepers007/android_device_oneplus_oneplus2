@@ -129,9 +129,6 @@ BOARD_CHARGER_DISABLE_INIT_BLANK := true
 # Enable real time lockscreen charging current values
 BOARD_GLOBAL_CFLAGS += -DBATTERY_REAL_INFO
 
-# CNE and DPM
-BOARD_USES_QCNE := true
-
 # Cpusets
 ENABLE_CPUSETS := true
 
