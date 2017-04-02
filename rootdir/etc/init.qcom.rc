@@ -90,6 +90,10 @@ on boot
     write /proc/sys/kernel/sched_boost 1
     write /proc/sys/vm/dirty_ratio 15
     write /proc/sys/vm/dirty_background_ratio 1
+
+    # Update touchscreen and keypad firmware
+    write /sys/bus/i2c/devices/12-0020/tp_fw_update 0
+    write /proc/s1302/fw_update 0
 	
     # Leds permission
     chown system system /sys/class/leds/led:flash_0/brightness
