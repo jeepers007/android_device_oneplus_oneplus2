@@ -109,11 +109,6 @@ PRODUCT_PACKAGES += \
 # Camera
 PRODUCT_PACKAGES += \
 	camera.msm8994 \
-	libcamera \
-	libmmcamera_interface \
-	libmmcamera_interface2 \
-	libmmjpeg_interface \
-	libqomx_core \
 	mm-qcamera-app \
 	sensors.hal.tof
 
