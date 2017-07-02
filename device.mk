@@ -127,6 +127,10 @@ PRODUCT_PACKAGES += \
     memtrack.msm8994 \
     libgenlock
 
+# Extra packages we can compile from source
+PRODUCT_PACKAGES += \
+    libtinyxml \
+    libprotobuf-cpp-full
 
 # Filesystem management tools
 PRODUCT_PACKAGES += \
