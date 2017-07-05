@@ -4,14 +4,15 @@
 
 # Audio
 audio.deep_buffer.media=true
-audio.offload.buffer.size.kb=32
+audio.offload.buffer.size.kb=64
 audio.offload.gapless.enabled=true
 audio.offload.min.duration.secs=30
 audio.offload.multiple.enabled=true
 audio.offload.passthrough=false
-audio.offload.pcm.16bit.enable=true
+audio.offload.pcm.16bit.enable=false
 audio.offload.pcm.24bit.enable=true
 audio.offload.track.enable=true
+audio_hal.period_size=192
 audio.offload.video=true
 media.aac_51_output_enabled=true
 mm.enable.smoothstreaming=true
@@ -19,16 +20,18 @@ persist.audio.fluence.speaker=true
 persist.audio.fluence.voicecall=true
 persist.audio.fluence.voicerec=false
 persist.audio.ssr.3mic=false
+qcom.hw.aac.encoder=true
 ro.qc.sdk.audio.fluencetype=fluence
 ro.qc.sdk.audio.ssr=false
-qcom.hw.aac.encoder=true
 use.voice.path.for.pcm.voip=true
+tunnel.audio.encode=false
 
 # Bluetooth
 bluetooth.enable_timeout_ms=12000
 bluetooth.hfp.client=1
 bt.max.hfpclient.connections=1
 qcom.bluetooth.soc=rome
+ro.bluetooth.a4wp=true
 ro.bluetooth.emb_wp_mode=true
 ro.bluetooth.wipower=true
 
@@ -56,6 +59,11 @@ ro.use_data_netmgrd=true
 persist.data.netmgrd.qos.enable=true
 persist.data.mode=concurrent
 ro.data.large_tcp_window_size=true
+
+# Dex2oat limits
+dalvik.vm.boot-dex2oat-threads=4
+dalvik.vm.dex2oat-threads=2
+dalvik.vm.image-dex2oat-threads=4
 
 # Google Assistant
 ro.opa.eligible_device=true
@@ -94,8 +102,6 @@ media.stagefright.enable-http=true
 media.stagefright.enable-player=true
 media.stagefright.enable-qcp=true
 media.stagefright.enable-scan=true
-media.stagefright.legacyencoder=true *get camera to work with mm blobs
-media.stagefright.less-secure=true *get camera to work with mm blobs
 media.stagefright.log-uri=1
 mmp.enable.3g2=true
 
