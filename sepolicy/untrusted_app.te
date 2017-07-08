@@ -1,0 +1,2 @@
+allow untrusted_app bt_firmware_file:dir read;
+allow untrusted_app sysfs_zram:dir search;
