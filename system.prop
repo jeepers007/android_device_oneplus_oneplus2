@@ -57,11 +57,6 @@ persist.data.netmgrd.qos.enable=true
 persist.data.mode=concurrent
 ro.data.large_tcp_window_size=true
 
-# DPM 
-persist.dpm.feature=7
-persist.env.fastdorm.enabled=true
-persist.sys.dpmd.nsrm=3
-
 # Google Assistant
 ro.opa.eligible_device=true
 
