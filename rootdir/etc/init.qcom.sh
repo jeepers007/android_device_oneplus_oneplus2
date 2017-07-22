@@ -1,22 +1,22 @@
 #!/system/bin/sh
-# Copyright (c) 2009-2015, The Linux Foundation. All rights reserved.
+# Copyright (c) 2009-2017, The Linux Foundation. All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions are met:
-#     * Redistributions of source code must retain the above copyright
-#       notice, this list of conditions and the following disclaimer.
-#     * Redistributions in binary form must reproduce the above copyright
-#       notice, this list of conditions and the following disclaimer in the
-#       documentation and/or other materials provided with the distribution.
-#     * Neither the name of The Linux Foundation nor
-#       the names of its contributors may be used to endorse or promote
-#       products derived from this software without specific prior written
-#       permission.
+#	* Redistributions of source code must retain the above copyright
+#		notice, this list of conditions and the following disclaimer.
+#	* Redistributions in binary form must reproduce the above copyright
+#		notice, this list of conditions and the following disclaimer in the
+#		documentation and/or other materials provided with the distribution.
+#	* Neither the name of The Linux Foundation nor
+#		the names of its contributors may be used to endorse or promote
+#		products derived from this software without specific prior written
+#		permission.
 #
 # THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
 # AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
 # IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-# NON-INFRINGEMENT ARE DISCLAIMED.  IN NO EVENT SHALL THE COPYRIGHT OWNER OR
+# NON-INFRINGEMENT ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
 # CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
 # EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
 # PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
@@ -28,32 +28,29 @@
 
 target=`getprop ro.board.platform`
 if [ -f /sys/devices/soc0/soc_id ]; then
-    platformid=`cat /sys/devices/soc0/soc_id`
+	platformid=`cat /sys/devices/soc0/soc_id`
 else
-    platformid=`cat /sys/devices/system/soc/soc0/id`
+	platformid=`cat /sys/devices/system/soc/soc0/id`
 fi
 #
 # Function to start sensors for DSPS enabled platforms
 #
-# VENDOR_EDIT
-# qiuchangping@BSP 2015-04-16 add begin for gyro sensitity calibration
 start_sensors()
 {
-    if [ -c /dev/msm_dsps -o -c /dev/sensors ]; then
-        mkdir -p /persist/sensors
-        chmod -h 775 /persist/sensors
-        chmod -h 664 /persist/sensors/sensors_settings
-        chown -h system.root /persist/sensors/sensors_settings
-        chmod -h 664 /persist/sensors/gyro_sensitity_cal
-        chown -h system.root /persist/sensors/gyro_sensitity_cal
+	if [ -c /dev/msm_dsps -o -c /dev/sensors ]; then
+		mkdir -p /persist/sensors
+		chmod -h 775 /persist/sensors
+		chmod -h 664 /persist/sensors/sensors_settings
+		chown -h system.root /persist/sensors/sensors_settings
+		chmod -h 664 /persist/sensors/gyro_sensitity_cal
+		chown -h system.root /persist/sensors/gyro_sensitity_cal
 
-        mkdir -p /data/misc/sensors
-        chmod -h 775 /data/misc/sensors
+		mkdir -p /data/misc/sensors
+		chmod -h 775 /data/misc/sensors
 
-        start sensors
-    fi
+		start sensors
+	fi
 }
-# qiucahngping@BSP add end
 
 start_battery_monitor()
 {
@@ -104,7 +101,7 @@ start_msm_irqbalance_8939()
 {
 	if [ -f /system/bin/msm_irqbalance ]; then
 		case "$platformid" in
-		    "239")
+			"239")
 			start msm_irqbalance;;
 		esac
 	fi
@@ -117,180 +114,195 @@ start_msm_irqbalance()
 	fi
 }
 
-
 start_copying_prebuilt_qcril_db()
 {
-    if [ -f /system/vendor/qcril.db -a ! -f /data/misc/radio/qcril.db ]; then
-        cp /system/vendor/qcril.db /data/misc/radio/qcril.db
-        chown -h radio.radio /data/misc/radio/qcril.db
-    fi
+	if [ -f /system/vendor/qcril.db -a ! -f /data/misc/radio/qcril.db ]; then
+		cp /system/vendor/qcril.db /data/misc/radio/qcril.db
+		chown -h radio.radio /data/misc/radio/qcril.db
+	fi
 }
 
 baseband=`getprop ro.baseband`
+
 #
 # Suppress default route installation during RA for IPV6; user space will take
 # care of this
 # exception default ifc
 for file in /proc/sys/net/ipv6/conf/*
 do
-  echo 0 > $file/accept_ra_defrtr
+	echo 0 > $file/accept_ra_defrtr
 done
 echo 1 > /proc/sys/net/ipv6/conf/default/accept_ra_defrtr
 
 case "$baseband" in
-        "svlte2a")
-        start bridgemgrd
-        ;;
+		"svlte2a")
+		start bridgemgrd
+		;;
 esac
 
 start_sensors
+start_copying_prebuilt_qcril_db
 
 case "$target" in
-    "msm7630_surf" | "msm7630_1x" | "msm7630_fusion")
-        if [ -f /sys/devices/soc0/hw_platform ]; then
-            value=`cat /sys/devices/soc0/hw_platform`
-        else
-            value=`cat /sys/devices/system/soc/soc0/hw_platform`
-        fi
-        case "$value" in
-            "Fluid")
-             start profiler_daemon;;
-        esac
-        ;;
-    "msm8660" )
-        if [ -f /sys/devices/soc0/hw_platform ]; then
-            platformvalue=`cat /sys/devices/soc0/hw_platform`
-        else
-            platformvalue=`cat /sys/devices/system/soc/soc0/hw_platform`
-        fi
-        case "$platformvalue" in
-            "Fluid")
-                start profiler_daemon;;
-        esac
-        ;;
-    "msm8960")
-        case "$baseband" in
-            "msm")
-                start_battery_monitor;;
-        esac
+	"msm7630_surf" | "msm7630_1x" | "msm7630_fusion")
+		if [ -f /sys/devices/soc0/hw_platform ]; then
+			value=`cat /sys/devices/soc0/hw_platform`
+		else
+			value=`cat /sys/devices/system/soc/soc0/hw_platform`
+		fi
+		case "$value" in
+			"Fluid")
+			start profiler_daemon;;
+		esac
+		;;
+	"msm8660" )
+		if [ -f /sys/devices/soc0/hw_platform ]; then
+			platformvalue=`cat /sys/devices/soc0/hw_platform`
+		else
+			platformvalue=`cat /sys/devices/system/soc/soc0/hw_platform`
+		fi
+		case "$platformvalue" in
+			"Fluid")
+				start profiler_daemon;;
+		esac
+		;;
+	"msm8960")
+		case "$baseband" in
+			"msm")
+				start_battery_monitor;;
+		esac
 
-        if [ -f /sys/devices/soc0/hw_platform ]; then
-            platformvalue=`cat /sys/devices/soc0/hw_platform`
-        else
-            platformvalue=`cat /sys/devices/system/soc/soc0/hw_platform`
-        fi
-        case "$platformvalue" in
-             "Fluid")
-                 start profiler_daemon;;
-             "Liquid")
-                 start profiler_daemon;;
-        esac
-        ;;
-    "msm8974")
-        platformvalue=`cat /sys/devices/soc0/hw_platform`
-        case "$platformvalue" in
-             "Fluid")
-                 start profiler_daemon;;
-             "Liquid")
-                 start profiler_daemon;;
-        esac
-        case "$baseband" in
-            "msm")
-                start_battery_monitor
-                ;;
-        esac
-        start_charger_monitor
-        ;;
-    "apq8084")
-        platformvalue=`cat /sys/devices/soc0/hw_platform`
-        case "$platformvalue" in
-             "Fluid")
-                 start profiler_daemon;;
-             "Liquid")
-                 start profiler_daemon;;
-        esac
-        ;;
-    "msm8226")
-        start_charger_monitor
-        ;;
-    "msm8610")
-        start_charger_monitor
-        ;;
-    "msm8916")
-        start_vm_bms
-        start_msm_irqbalance_8939
-        if [ -f /sys/devices/soc0/soc_id ]; then
-            soc_id=`cat /sys/devices/soc0/soc_id`
-        else
-            soc_id=`cat /sys/devices/system/soc/soc0/id`
-        fi
+		if [ -f /sys/devices/soc0/hw_platform ]; then
+			platformvalue=`cat /sys/devices/soc0/hw_platform`
+		else
+			platformvalue=`cat /sys/devices/system/soc/soc0/hw_platform`
+		fi
+		case "$platformvalue" in
+			"Fluid")
+				start profiler_daemon;;
+			"Liquid")
+				start profiler_daemon;;
+		esac
+		;;
+	"msm8974")
+		platformvalue=`cat /sys/devices/soc0/hw_platform`
+		case "$platformvalue" in
+			"Fluid")
+				start profiler_daemon;;
+			"Liquid")
+				start profiler_daemon;;
+		esac
+		case "$baseband" in
+			"msm")
+				start_battery_monitor
+				;;
+		esac
+		start_charger_monitor
+		;;
+	"apq8084")
+		platformvalue=`cat /sys/devices/soc0/hw_platform`
+		case "$platformvalue" in
+			"Fluid")
+				start profiler_daemon;;
+			"Liquid")
+				start profiler_daemon;;
+		esac
+		;;
+	"msm8226")
+		start_charger_monitor
+		;;
+	"msm8610")
+		start_charger_monitor
+		;;
+	"msm8916")
+		start_vm_bms
+		start_msm_irqbalance_8939
+		if [ -f /sys/devices/soc0/soc_id ]; then
+			soc_id=`cat /sys/devices/soc0/soc_id`
+		else
+			soc_id=`cat /sys/devices/system/soc/soc0/id`
+		fi
 
-        if [ -f /sys/devices/soc0/platform_subtype_id ]; then
-             platform_subtype_id=`cat /sys/devices/soc0/platform_subtype_id`
-        fi
-        if [ -f /sys/devices/soc0/hw_platform ]; then
-             hw_platform=`cat /sys/devices/soc0/hw_platform`
-        fi
-        case "$soc_id" in
-             "239")
-                  case "$hw_platform" in
-                       "Surf")
-                            case "$platform_subtype_id" in
-                                 "1")
-                                      setprop qemu.hw.mainkeys 0
-                                      ;;
-                            esac
-                            ;;
-                       "MTP")
-                          case "$platform_subtype_id" in
-                               "3")
-                                    setprop qemu.hw.mainkeys 0
-                                    ;;
-                          esac
-                          ;;
-                  esac
-                  ;;
-        esac
-        ;;
-    "msm8994" | "msm8992")
-        start_msm_irqbalance
-        ;;
-    "msm8909")
-        start_vm_bms
-        ;;
+		if [ -f /sys/devices/soc0/platform_subtype_id ]; then
+			platform_subtype_id=`cat /sys/devices/soc0/platform_subtype_id`
+		fi
+		if [ -f /sys/devices/soc0/hw_platform ]; then
+			hw_platform=`cat /sys/devices/soc0/hw_platform`
+		fi
+		case "$soc_id" in
+			"239")
+				case "$hw_platform" in
+					"Surf")
+						case "$platform_subtype_id" in
+							"1")
+								setprop qemu.hw.mainkeys 0
+								;;
+							esac
+							;;
+						"MTP")
+						case "$platform_subtype_id" in
+							"3")
+								setprop qemu.hw.mainkeys 0
+								;;
+							esac
+							;;
+				esac
+				;;
+		esac
+		;;
+	"msm8994" | "msm8992")
+		start_msm_irqbalance
+		;;
+	"msm8909")
+		start_vm_bms
+		;;
 esac
 
 bootmode=`getprop ro.bootmode`
 emmc_boot=`getprop ro.boot.emmc`
 case "$emmc_boot"
-    in "true")
-        if [ "$bootmode" != "charger" ]; then # start rmt_storage and rfs_access
-            start rmt_storage
-            start rfs_access
-        fi
-    ;;
+	in "true")
+		if [ "$bootmode" != "charger" ]; then # start rmt_storage and rfs_access
+			start rmt_storage
+			start rfs_access
+		fi
+	;;
 esac
 
 #
 # Make modem config folder and copy firmware config to that folder
 #
 if [ -f /data/misc/radio/ver_info.txt ]; then
-    prev_version_info=`cat /data/misc/radio/ver_info.txt`
+	prev_version_info=`cat /data/misc/radio/ver_info.txt`
 else
-    prev_version_info=""
+	prev_version_info=""
 fi
 
-cur_version_info=`cat /firmware/verinfo/ver_info.txt`
-if [ ! -f /firmware/verinfo/ver_info.txt -o "$prev_version_info" != "$cur_version_info" ]; then
-    rm -rf /data/misc/radio/modem_config
-    mkdir /data/misc/radio/modem_config
-    chmod 770 /data/misc/radio/modem_config
-    cp -r /firmware/image/modem_pr/mcfg/configs/* /data/misc/radio/modem_config
-    chown -hR radio.radio /data/misc/radio/modem_config
-    cp /firmware/verinfo/ver_info.txt /data/misc/radio/ver_info.txt
-    chown radio.radio /data/misc/radio/ver_info.txt
-fi
-cp /firmware/image/modem_pr/mbn_ota.txt /data/misc/radio/modem_config
-chown radio.radio /data/misc/radio/modem_config/mbn_ota.txt
+##cur_version_info=`cat /firmware/verinfo/ver_info.txt`
+##if [ ! -f /firmware/verinfo/ver_info.txt -o "$prev_version_info" != "$cur_version_info" ]; then
+	rm -rf /data/misc/radio/modem_config
+	mkdir /data/misc/radio/modem_config
+	chmod 770 /data/misc/radio/modem_config
+##	cp -r /firmware/image/modem_pr/mcfg/configs/* /data/misc/radio/modem_config
+	cp -r /system/etc/firmware/mbn_ota/* /data/misc/radio/modem_config
+	chown -hR radio.radio /data/misc/radio/modem_config
+##	cp /firmware/verinfo/ver_info.txt /data/misc/radio/ver_info.txt
+##	chown radio.radio /data/misc/radio/ver_info.txt
+##fi
+##cp /firmware/image/modem_pr/mbn_ota.txt /data/misc/radio/modem_config
+##chown radio.radio /data/misc/radio/modem_config/mbn_ota.txt
 echo 1 > /data/misc/radio/copy_complete
 
+#check build variant for printk logging
+#current default minimum boot-time-default
+buildvariant=`getprop ro.build.type`
+case "$buildvariant" in
+	"userdebug" | "eng")
+		#set default loglevel to KERN_INFO
+		echo "6 6 1 7" > /proc/sys/kernel/printk
+		;;
+	*)
+		#set default loglevel to KERN_WARNING
+		echo "4 4 1 4" > /proc/sys/kernel/printk
+		;;
+esac
