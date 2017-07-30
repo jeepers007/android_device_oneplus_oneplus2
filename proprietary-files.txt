@@ -482,6 +482,7 @@ etc/permissions/telephonyservice.xml
 -framework/qcrilhook.jar|e94696ceea03cd31e159dc7fc10c5d694fe9fd94
 framework/qti-telephony-common.jar|fbd9aa168759bca89327643a23a7d32aaa78f79a
 framework/QtiTelephonyServicelibrary.jar|1d4ff53f9229caaa91fe3994757bcd359a18b756
+lib/libparam.so
 lib64/libparam.so
 -priv-app/qcrilmsgtunnel/qcrilmsgtunnel.apk|8d6a447cc4ee0ca78f6abb042b484c52775db9ed
 vendor/bin/qti
