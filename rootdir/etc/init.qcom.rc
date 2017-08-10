@@ -78,6 +78,10 @@ on fs
     mount_all fstab.qcom
 
 on boot
+    symlink /dev/block/platform/soc.0 /dev/block/bootdevice
+    start rmt_storage
+    start rfs_access
+
     # Secure Touch
     chmod 0660 /sys/devices/soc.0/f9924000.i2c/i2c-2/2-0020/input/input0/secure_touch_enable
     chmod 0440 /sys/devices/soc.0/f9924000.i2c/i2c-2/2-0020/input/input0/secure_touch
@@ -92,7 +96,7 @@ on boot
     write /proc/sys/vm/dirty_background_ratio 1
 
     # Update touchscreen and keypad firmware
-    write /sys/bus/i2c/devices/12-0020/tp_fw_update 0
+    write /sys/bus/i2c/devices/2-0020/tp_fw_update 0
     write /proc/s1302/fw_update 0
 	
     # Leds permission
