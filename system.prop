@@ -28,7 +28,7 @@ tunnel.audio.encode=false
 
 # Bluetooth
 bluetooth.enable_timeout_ms=12000
-bluetooth.hfp.client=1
+bluetooth.hfp.client=1.7
 bt.max.hfpclient.connections=1
 qcom.bluetooth.soc=rome
 ro.bluetooth.a4wp=true
@@ -38,7 +38,6 @@ ro.bluetooth.wipower=true
 # Camera
 persist.camera.HAL3.enabled=0
 persist.camera.cpp.duplication=false
-vidc.debug.perf.mode=2
 vidc.enc.dcvs.extra-buff-count=2
 
 # CEC
@@ -50,9 +49,6 @@ ro.hdmi.enable=true
 
 # CNE
 persist.cne.feature=1
-
-# CoreSight
-persist.debug.coresight.config=stm-events
 
 # Data modules
 ro.use_data_netmgrd=true
@@ -69,15 +65,10 @@ dalvik.vm.image-dex2oat-threads=4
 ro.opa.eligible_device=true
 
 # Google WFD 
-persist.debug.wfd.enable=1
 persist.sys.wfd.virtual=0
 
 # Graphics
 dalvik.vm.heapsize=36m
-debug.composition.type=c2d
-debug.egl.hw=1
-debug.mdpcomp.logs=0
-debug.sf.hw=1
 dev.pm.dyn_samplingrate=1
 persist.demo.hdmirotationlock=false
 persist.hwc.enable_vds=1
