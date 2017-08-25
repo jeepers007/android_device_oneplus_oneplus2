@@ -228,6 +228,9 @@ PRODUCT_PACKAGES += \
 	power.oneplus2 \
 	thermal.oneplus2
 
+PRODUCT_COPY_FILES += \
+	$(LOCAL_PATH)/configs/thermal-engine.conf:system/etc/thermal-engine.conf
+
 # Ramdisk
 PRODUCT_PACKAGES += \
 	init.qcom.bt.sh \
