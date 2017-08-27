@@ -1,0 +1,6 @@
+allow location location_exec:file rx_file_perms;
+allow location self:capability { setuid setgid net_raw net_admin };
+allow location sensorservice_service:service_manager find;
+# slim_daemon
+allow location sysfs_msm_subsys:dir r_dir_perms;
+allow location sysfs_msm_subsys:lnk_file rw_file_perms;

@@ -1,0 +1,5 @@
+allow bluetooth sysfs:file rw_file_perms;
+allow bluetooth sysfs_usb:file w_file_perms;
+# read /persist/bdaddr.txt
+allow bluetooth persist_file:dir search;
+allow bluetooth persist_file:file r_file_perms;

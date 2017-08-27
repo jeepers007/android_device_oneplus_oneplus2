@@ -1,6 +1,4 @@
-allow qti_init_shell bluetooth_loader_exec:file { read open };
-allow qti_init_shell btnvtool_exec:file { read getattr open execute execute_no_trans };
 allow qti_init_shell kmsg_device:chr_file { write open };
-allow qti_init_shell persist_bluetooth_file:dir search;
-allow qti_init_shell persist_bluetooth_file:file { read getattr open };
-allow qti_init_shell smem_log_device:chr_file { read write ioctl open };
+allow qti_init_shell self:socket create_socket_perms;
+allow qti_init_shell proc_kernel_sched:file rw_file_perms;
+qmux_socket(qti_init_shell)

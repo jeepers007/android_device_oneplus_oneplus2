@@ -1,1 +1,8 @@
-allow cameraserver system_data_file:sock_file write;
+# communicate with camera
+allow cameraserver camera:unix_dgram_socket sendto;
+allow cameraserver camera_data_file:sock_file write;
+
+# allow communication w/perfd
+allow cameraserver perfd_data_file:dir search;
+allow cameraserver perfd:unix_stream_socket connectto;
+allow cameraserver perfd_data_file:sock_file write;

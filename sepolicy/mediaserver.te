@@ -4,3 +4,12 @@ allow mediaserver audio_device:chr_file { ioctl open read write };
 allow mediaserver system_data_file:sock_file write;
 allow mediaserver cameraproxy_service:service_manager find;
 allow mediaserver cameraserver_service:service_manager add;
+allow mediaserver persist_file:dir search;
+allow mediaserver persist_audio_file:dir search;
+allow mediaserver persist_audio_file:file r_file_perms;
+
+# allow communication w/perfd
+allow mediaserver perfd_data_file:dir search;
+allow mediaserver perfd_data_file:sock_file write;
+allow mediaserver perfd:unix_dgram_socket sendto;
+allow mediaserver perfd:unix_stream_socket connectto;

@@ -1,0 +1,7 @@
+type dpl_device, dev_type;
+type media_device, dev_type;
+type modem_block_device, dev_type;
+type shared_log_device, dev_type;
+type ssd_block_device, dev_type;
+type thermal_engine_device, dev_type;
+type v41_subdev_device, dev_type;
