@@ -2,6 +2,9 @@
 # system.prop for OnePlus2
 #
 
+# Product API level at launch 
+ro.product.first_api_level=23
+
 # Audio
 audio.deep_buffer.media=true
 audio.offload.buffer.size.kb=64
