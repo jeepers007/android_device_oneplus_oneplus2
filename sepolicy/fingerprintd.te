@@ -14,3 +14,6 @@ allow fingerprintd sysfs:file write;
 allow fingerprintd vfat:file r_file_perms;
 r_dir_file(fingerprintd, firmware_file)
 r_dir_file(fingerprintd, proc_touchpanel)
+allow fingerprintd system_data_file:dir { write add_name remove_name };
+allow fingerprintd system_data_file:sock_file { create unlink };
+
