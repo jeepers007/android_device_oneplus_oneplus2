@@ -39,7 +39,6 @@ ro.bluetooth.emb_wp_mode=true
 ro.bluetooth.wipower=true
 
 # Camera
-persist.camera.HAL3.enabled=0
 persist.camera.cpp.duplication=false
 vidc.enc.dcvs.extra-buff-count=2
 
