@@ -111,8 +111,7 @@ PRODUCT_PACKAGES += \
 	camera.msm8994 \
 	libshim_camera \
 	libshim_ims-camera \
-	sensors.hal.tof \
-	Snap
+	sensors.hal.tof
 
 # Charging - for off charging mode
 PRODUCT_PACKAGES += \
@@ -186,10 +185,6 @@ PRODUCT_COPY_FILES += \
 # Lights
 PRODUCT_PACKAGES += \
 	lights.msm8994
-
-# LiveDisplay native
-PRODUCT_PACKAGES += \
-	libjni_livedisplay
 
 # Media
 PRODUCT_COPY_FILES += \
