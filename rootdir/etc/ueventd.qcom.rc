@@ -42,8 +42,8 @@
 /dev/smd6                 0660   system     system
 /dev/smd7                 0660   bluetooth  bluetooth
 /dev/ccid_bridge          0660   system     system
-/dev/ipa                  0660   net_admin  net_admin
-/dev/wwan_ioctl           0660   net_admin  net_admin
+/dev/ipa                  0660   system     net_admin
+/dev/wwan_ioctl           0660   system     net_admin
 /dev/ipaNatTable          0660   net_admin  net_admin
 /dev/rmnet_ctrl           0660   usb        usb
 /dev/dpl_ctrl             0660   usb        usb
@@ -106,8 +106,7 @@
 /dev/video*               0660   system     camera
 /dev/media*               0660   system     camera
 /dev/v4l-subdev*          0660   system     camera
-#changhua.li modify from 660 to 666 for alipay use tz
-/dev/qseecom              0666   system     drmrpc
+/dev/qseecom              0660   system     drmrpc
 /dev/seemplog             0660   system     system
 /dev/pft                  0660   system     drmrpc
 /dev/gemini0              0660   system     camera
@@ -199,6 +198,15 @@
 /sys/devices/virtual/input/input*                   poll           0660    input    system
 /sys/devices/virtual/input/input*                   pollrate_ms    0660    input    system
 
+# vm_bms
+/dev/vm_bms               0660   system     system
+/dev/battery_data         0660   system     system
+
+# wlan
+/dev/wcnss_wlan           0660   system     system
+/dev/wcnss_ctrl           0660   system     system
+/sys/devices/pci0000:00/0000:00:00.0/0000:01:00.0/net/wlan0/queues/rx-* rps_cpus 0660 system system
+
 # UIO devices
 /dev/uio0                 0660   system     system
 /dev/uio1                 0660   system     system
@@ -214,7 +222,7 @@
 /dev/ramdump*             0640   system     system
 
 # Add device block for FRP
-/dev/block/bootdevice/by-name/config    0660   system     system
+/dev/block/bootdevice/by-name/config    0600   system     system
 
-# Fingerprint sensor
-/dev/fpc1020		 0660	system	system
+
+
