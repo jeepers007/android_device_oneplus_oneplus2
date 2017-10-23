@@ -247,6 +247,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
 	sensors.msm8994
 
+# For SPN display
+PRODUCT_COPY_FILES += \
+	$(LOCAL_PATH)/configs/spn-conf.xml:system/etc/spn-conf.xml
+
 # USB
 PRODUCT_PACKAGES += \
 	com.android.future.usb.accessory
